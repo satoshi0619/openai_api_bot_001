@@ -5,6 +5,7 @@ import openai
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 # ゲームの初期設定
+
 if "game_state" not in st.session_state:
     st.session_state["game_state"] = {
         "location": "始まりの村",
@@ -38,7 +39,8 @@ def present_choices(story):
     return choices
 
 # ゲームの進行に関する関数
-def play_game(action):
+def play_game():
+    choice = st.session_state["choice"]
     game_state = st.session_state["game_state"]
 
     # ゲームオーバーのチェック
@@ -60,9 +62,9 @@ def play_game(action):
         model="gpt-4",
         messages=[
             {"role": "system", "content": "ゲームマスター"},
-            {"role": "user", "content": action}
+            {"role": "user", "content": choice}
         ],
-        max_tokens=150
+        max_tokens=100  # max_tokensを小さく設定
     )
 
     # 新しいストーリーの追加
@@ -85,7 +87,7 @@ st.write("ストーリー: ", game_state["story"])
 
 # 現在のストーリーに基づいて選択肢を提示
 choices = present_choices(game_state["story"])
-choice = st.radio("どうする？", choices)
+choice = st.radio("どうする？", choices, on_change=play_game, args=(choice,))
 
 # 行動ボタン
 if st.button("行動する"):
