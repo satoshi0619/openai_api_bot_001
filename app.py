@@ -86,8 +86,18 @@ if "choice" not in st.session_state:
 # 選択肢の変更時に play_game を呼び出す
 st.radio("どうする？", choices, key="choice", on_change=play_game)
 
-# ゲームの現在の状態とストーリーを表示
+# ゲームの初期設定が完了したことを確認
+if "game_state" not in st.session_state:
+    st.session_state["game_state"] = {
+        # ... 初期設定 ...
+    }
+
 game_state = st.session_state["game_state"]
+
+# ここで初めて present_choices を呼び出す
+choices = present_choices(game_state["story"])
+
+# ゲームの現在の状態を表示
 st.write("場所: ", game_state["location"])
 st.write("残り行動回数: ", game_state["remaining_actions"])
 st.write("仲間の数: ", game_state["companions"])
