@@ -14,15 +14,8 @@ if "game_state" not in st.session_state:
         "story": "あなたは冒険者かかかちゃん。剣と魔法の世界で冒険をして、美少女を仲間にする旅に出ます。"
     }
 
+# ゲームの現在の状態を取得
 game_state = st.session_state["game_state"]
-
-# ここで present_choices を呼び出す
-choices = present_choices(game_state["story"])
-if "choice" not in st.session_state:
-    st.session_state["choice"] = choices[0]
-
-# 選択肢の変更時に play_game を呼び出す
-st.radio("どうする？", choices, key="choice", on_change=play_game)
 
 # 選択肢を提示する関数
 def present_choices(story):
