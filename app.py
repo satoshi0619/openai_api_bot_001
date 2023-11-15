@@ -93,10 +93,6 @@ if "choice" not in st.session_state:
 # 選択肢の変更時に play_game を呼び出す
 choice = st.radio("どうする？", choices, key="choice", on_change=play_game)
 
-# 行動ボタン
-if st.button("行動する"):
-    play_game(choice)
-
 # ゲームオーバーの処理
 if game_state["game_over"]:
     st.write("ゲームオーバーです。")
