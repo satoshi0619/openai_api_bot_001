@@ -71,15 +71,21 @@ def play_game():
             {"role": "system", "content": "ゲームマスター"},
             {"role": "user", "content": choice}
         ],
-        max_tokens=100  # max_tokensを小さく設定
+        max_tokens=500  # max_tokensを小さく設定
     )
 
     # 新しいストーリーの追加
     new_story = response.choices[0].message["content"]
-    if len(new_story) > 150:
-        new_story = new_story[:150] + "..."  # 150文字に切り詰め
 
-    game_state["story"] += "\n" + new_story
+    # 応答を要約するコード（ここで要約アルゴリズムを実装する）
+    # 例として、応答の最初の文だけを取得する単純な要約を行います。
+    summary = new_story.split('.')[0] + '.' if '.' in new_story else new_story
+
+    # 要約されたストーリーを追加
+    if len(summary) > 150:
+        summary = summary[:150] + "..."  # 150文字に切り詰め
+
+    game_state["story"] += "\n" + summary
 
 # ユーザーインターフェイスの構築
 st.title("冒険の旅へようこそ！")
