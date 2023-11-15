@@ -1,4 +1,6 @@
 
+%%writefile app.py
+
 import streamlit as st
 import openai
 
@@ -16,12 +18,26 @@ if "game_state" not in st.session_state:
     }
 
 # 選択肢を提示する関数
-def present_choices():
-    choices = [
-        "隣の村へ旅を続ける",
-        "森を探検する",
-        "宿屋で休憩する"
-    ]
+def present_choices(story):
+    # ストーリーの内容に基づいて選択肢を決定
+    if "森" in story:
+        choices = [
+            "深い森の奥へ進む",
+            "森の中の洞窟を探検する",
+            "森を離れて村へ戻る"
+        ]
+    elif "村" in story:
+        choices = [
+            "村の市場で物資を調達する",
+            "村の宿屋で休憩する",
+            "村を離れて次の冒険へ"
+        ]
+    else:
+        choices = [
+            "隣の村へ旅を続ける",
+            "近くの森を探検する",
+            "近くの川で休憩する"
+        ]
     return choices
 
 # ゲームの進行に関する関数
@@ -49,11 +65,14 @@ def play_game(action):
             {"role": "system", "content": "ゲームマスター"},
             {"role": "user", "content": action}
         ],
-        max_tokens=1000
+        max_tokens=150
     )
 
     # 新しいストーリーの追加
     new_story = response.choices[0].message["content"]
+    if len(new_story) > 150:
+        new_story = new_story[:150] + "..."  # 150文字に切り詰め
+
     game_state["story"] += "\n" + new_story
 
 # ユーザーインターフェイスの構築
