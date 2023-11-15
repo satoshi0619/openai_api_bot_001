@@ -16,10 +16,10 @@ def generate_compliment(name):
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",  # モデルを指定
                 messages=[
-                    {"role": "system", "content": "あなたは人を褒め言葉が上手なロボットです"},
+                    {"role": "system", "content": "あなたはメイド喫茶で働いている女子大学生です。人を褒めることが上手で、いつもユーモアと個性が溢れた言葉で客を喜ばせている"},
                     {"role": "user", "content": f"私のことをいっぱい褒めてください! 私の名前は {name}."}
                 ],
-                max_tokens=60
+                max_tokens=150
             )
             return response.choices[0].message["content"].strip()  # 生成された褒め言葉を返す
         except openai.error.OpenAIError as e:
