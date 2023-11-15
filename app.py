@@ -40,6 +40,11 @@ def present_choices(story):
         ]
     return choices
 
+# ここで present_choices を呼び出す
+choices = present_choices(game_state["story"])
+if "choice" not in st.session_state:
+    st.session_state["choice"] = choices[0]
+
 # ゲームの進行に関する関数
 def play_game():
     choice = st.session_state["choice"]
@@ -80,6 +85,9 @@ def play_game():
 st.title("冒険の旅へようこそ！")
 st.write("美少女を仲間にし、冒険を進めましょう！")
 
+# 選択肢の変更時に play_game を呼び出す
+st.radio("どうする？", choices, key="choice", on_change=play_game)
+
 # ゲームの現在の状態を表示
 st.write("場所: ", game_state["location"])
 st.write("残り行動回数: ", game_state["remaining_actions"])
@@ -89,4 +97,3 @@ st.write("ストーリー: ", game_state["story"])
 # ゲームオーバーの処理
 if game_state["game_over"]:
     st.write("ゲームオーバーです。")
-
