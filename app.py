@@ -2,43 +2,69 @@
 import streamlit as st
 import openai
 
-# Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
+# OpenAI APIキーの設定
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
-# st.session_stateを使いメッセージのやりとりを保存
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [
-        {"role": "system", "content": "あなたは秋葉原のメイド喫茶で働いている、ユーモアと個性が溢れる美少女大学生「ななせちゃん」です。あなたは男を喜ばせる会話が得意です。絵文字はちょこちょこ使います。目の前には、「かかかちゃん」という男性が来店して、あなたを指名していまし。"}
-    ]
+# ゲームの初期設定
+if "game_state" not in st.session_state:
+    st.session_state["game_state"] = {
+        "location": "始まりの村",
+        "remaining_actions": 10,
+        "companions": 0,
+        "game_over": False,
+        "story": "あなたは冒険者かかかちゃん。剣と魔法の世界で冒険をして、美少女を仲間にする旅に出ます。"
+    }
 
-# チャットボットとやりとりする関数
-def communicate():
-    messages = st.session_state["messages"]
+# ゲームの進行に関する関数
+def play_game(action):
+    game_state = st.session_state["game_state"]
 
-    user_message = {"role": "user", "content": st.session_state["user_input"]}
-    messages.append(user_message)
+    # ゲームオーバーのチェック
+    if game_state["game_over"]:
+        st.write("ゲームは終了しました。")
+        return
 
+    # 行動回数の更新
+    game_state["remaining_actions"] -= 1
+
+    # ゲームオーバーの条件をチェック
+    if game_state["remaining_actions"] <= 0:
+        game_state["game_over"] = True
+        st.write("残り行動回数がなくなりました。冒険は終わりです。")
+        return
+
+    # OpenAIを使用してゲームストーリーを進行
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=messages,
-        max_tokens=500  # 応答の最大長
+        messages=[
+            {"role": "system", "content": "ゲームマスター"},
+            {"role": "user", "content": action}
+        ],
+        max_tokens=150
     )
 
-    bot_message_content = response.choices[0].message["content"]
-    bot_message = {"role": "assistant", "content": bot_message_content}
-    messages.append(bot_message)
-    st.session_state["user_input"] = ""  # 入力欄を消去
+    # 新しいストーリーの追加
+    new_story = response.choices[0].message["content"]
+    game_state["story"] += "\n" + new_story
 
 # ユーザーインターフェイスの構築
-st.title("夢の楽園～at home'sへようこそ！")
-st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
+st.title("冒険の旅へようこそ！")
+st.write("美少女を仲間にし、冒険を進めましょう！")
 
-user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input", on_change=communicate)
+# ゲームの現在の状態を表示
+game_state = st.session_state["game_state"]
+st.write("場所: ", game_state["location"])
+st.write("残り行動回数: ", game_state["remaining_actions"])
+st.write("仲間の数: ", game_state["companions"])
+st.write("ストーリー: ", game_state["story"])
 
-if st.session_state["messages"]:
-    messages = st.session_state["messages"]
+# ユーザーからの行動を受け取る
+action = st.text_input("どうする？", key="action")
 
-    for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        # speakerの表示を変更
-        speaker = "ぼく" if message["role"] == "user" else "ななせちゃん"
-        st.write(speaker + ": " + message["content"])
+# 行動ボタン
+if st.button("行動する"):
+    play_game(action)
+
+# ゲームオーバーの処理
+if game_state["game_over"]:
+    st.write("ゲームオーバーです。")
