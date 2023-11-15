@@ -83,8 +83,8 @@ st.write("残り行動回数: ", game_state["remaining_actions"])
 st.write("仲間の数: ", game_state["companions"])
 st.write("ストーリー: ", game_state["story"])
 
-# 選択肢を提示
-choices = present_choices()
+# 現在のストーリーに基づいて選択肢を提示
+choices = present_choices(game_state["story"])
 choice = st.radio("どうする？", choices)
 
 # 行動ボタン
