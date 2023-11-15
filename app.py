@@ -87,7 +87,11 @@ st.write("ストーリー: ", game_state["story"])
 
 # 現在のストーリーに基づいて選択肢を提示
 choices = present_choices(game_state["story"])
-choice = st.radio("どうする？", choices, on_change=play_game, args=(choice,))
+if "choice" not in st.session_state:
+    st.session_state["choice"] = choices[0]  # 初期値を設定
+
+# 選択肢の変更時に play_game を呼び出す
+choice = st.radio("どうする？", choices, key="choice", on_change=play_game)
 
 # 行動ボタン
 if st.button("行動する"):
