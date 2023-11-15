@@ -82,8 +82,8 @@ def play_game():
     summary = new_story.split('.')[0] + '.' if '.' in new_story else new_story
 
     # 要約されたストーリーを追加
-    if len(summary) > 150:
-        summary = summary[:150] + "..."  # 150文字に切り詰め
+    if len(summary) > 500:
+        summary = summary[:500] + "..."  # 150文字に切り詰め
 
     game_state["story"] += "\n" + summary
 
