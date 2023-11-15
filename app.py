@@ -15,6 +15,15 @@ if "game_state" not in st.session_state:
         "story": "あなたは冒険者かかかちゃん。剣と魔法の世界で冒険をして、美少女を仲間にする旅に出ます。"
     }
 
+# 選択肢を提示する関数
+def present_choices():
+    choices = [
+        "隣の村へ旅を続ける",
+        "森を探検する",
+        "宿屋で休憩する"
+    ]
+    return choices
+
 # ゲームの進行に関する関数
 def play_game(action):
     game_state = st.session_state["game_state"]
@@ -58,12 +67,13 @@ st.write("残り行動回数: ", game_state["remaining_actions"])
 st.write("仲間の数: ", game_state["companions"])
 st.write("ストーリー: ", game_state["story"])
 
-# ユーザーからの行動を受け取る
-action = st.text_input("どうする？", key="action")
+# 選択肢を提示
+choices = present_choices()
+choice = st.radio("どうする？", choices)
 
 # 行動ボタン
 if st.button("行動する"):
-    play_game(action)
+    play_game(choice)
 
 # ゲームオーバーの処理
 if game_state["game_over"]:
