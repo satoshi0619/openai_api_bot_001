@@ -1,13 +1,19 @@
+import streamlit as st
+import openai
+
+# OpenAI APIキーの設定
+openai.api_key = st.secrets.OpenAIAPI.openai_api_key
+
 # ユーザーインターフェイスの構築
-st.title("褒め言葉ジェネレーター")
-name = st.text_input("あなたの名前を教えてください。")
+st.title("あなたのこと！褒めてあげちゃうぞ～！")
+name = st.text_input("名前を教えてください～！")
 
 # 褒め言葉を生成する関数
 def generate_compliment(name):
     if name:  # 名前が入力されているか確認
         # OpenAIのAPIを使用して褒め言葉を生成
         response = openai.Completion.create(
-            model="text-davinci-003",  # GPT-4モデルを指定
+            model="gpt-3.5-turbo",  # GPT-4モデルを指定
             prompt=f"私は{ name }を褒めるチャットボットです。{ name }に対してポジティブで心温まる褒め言葉をいくつか教えてください。",
             temperature=0.7,
             max_tokens=60,
