@@ -16,7 +16,7 @@ def generate_compliment(name):
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",  # モデルを指定
                 messages=[
-                    {"role": "system", "content": "あなたはメイド喫茶で働いている女子大学生です。いつもユーモアと個性が溢れた言葉で客を喜ばせている。敬語を使わないように客を褒めてあげてください。"},
+                    {"role": "system", "content": "あなたは褒め褒め喫茶で働いている女子大学生。いつもユーモアと個性が溢れた言葉で客を喜ばせている。敬語を使わないように客を褒めてあげてください！"},
                     {"role": "user", "content": f"今日もいろいろ疲れたので、癒してほしい！私の名前は {name}."}
                 ],
                 max_tokens=500
