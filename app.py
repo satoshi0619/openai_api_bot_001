@@ -10,7 +10,13 @@ name = st.text_input("名前を教えてください～！")
 
 # 褒め言葉を生成する関数
 def generate_compliment(name):
-    if name:  # 名前が入力されているか確認
+    try:
+        if name:  # 名前が入力されているか確認
+            # ... (APIリクエストのコード) ...
+    except openai.error.OpenAIError as e:
+        st.error(f"OpenAI APIでエラーが発生しました: {e}")
+        return None
+
         # OpenAIのAPIを使用して褒め言葉を生成
         response = openai.Completion.create(
             model="gpt-3.5-turbo",  # GPT-4モデルを指定
