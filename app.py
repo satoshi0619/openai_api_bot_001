@@ -49,7 +49,7 @@ def play_game(action):
             {"role": "system", "content": "ゲームマスター"},
             {"role": "user", "content": action}
         ],
-        max_tokens=150
+        max_tokens=1000
     )
 
     # 新しいストーリーの追加
