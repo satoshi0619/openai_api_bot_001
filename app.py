@@ -58,14 +58,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# 画面の左下に固定される画像を配置
+st.markdown(
+    f"""
+    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara.png" class="fixed-img">
+    """,
+    unsafe_allow_html=True
+)
+
 st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
 
-user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input", on_change=communicate)
+user_input = st.text_input("メイドちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
         # speakerの表示を変更
-        speaker = "かかかちゃん" if message["role"] == "user" else "ななせちゃん"
+        speaker = "ぼく" if message["role"] == "user" else "ななせちゃん"
         st.write(speaker + ": " + message["content"])
