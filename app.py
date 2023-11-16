@@ -46,7 +46,7 @@ with st.container():
         f"""
         <style>
         .reportview-container .main .block-container{{
-            background-image: url("https://github.com/satoshi0619/openai_api_bot_001/blob/main/akihabara_background.jpg");
+            background-image: url("akihabara.png");
             background-size: cover;
             padding: 5rem;
         }}
