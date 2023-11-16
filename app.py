@@ -40,18 +40,20 @@ def communicate():
 # ユーザーインターフェイスの構築
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
 
-# 背景画像の設定
-st.markdown(
-    """
-    <style>
-    .main {
-        background-image: url("akihabara_background.jpg");
-        background-size: cover;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# 背景画像のあるコンテナの作成
+with st.container():
+    st.markdown(
+        f"""
+        <style>
+        .reportview-container .main .block-container{{
+            background-image: url("akihabara_background.jpg");
+            background-size: cover;
+            padding: 5rem;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
 
