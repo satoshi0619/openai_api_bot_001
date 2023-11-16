@@ -38,6 +38,7 @@ def communicate():
 
 # ユーザーインターフェイスの構築
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
+st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
 
 # GitHub上の背景画像のURL
 bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara_background.jpg"
@@ -80,17 +81,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
-
 # テキスト入力フィールドとボタンにオーバーレイを追加
 with st.container():
     st.markdown('<div class="overlay-bg">', unsafe_allow_html=True)
     user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input")
     st.markdown('</div>', unsafe_allow_html=True)
     
-
-
-
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
