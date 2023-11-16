@@ -81,4 +81,4 @@ if st.session_state["messages"]:
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
         # speakerの表示を変更
         speaker = "かかかちゃん" if message["role"] == "user" else "ななせちゃん"
-        st.write(speaker + ": " + message["content"])
+        st.write(f"<b>{speaker}:</b> {message['content']}", unsafe_allow_html=True)
