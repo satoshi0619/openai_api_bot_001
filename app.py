@@ -68,7 +68,7 @@ st.markdown(
 # 画面の左下に固定される画像を配置
 st.markdown(
     f"""
-    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara.png" class="fixed-img" style="width:auto; height:100px;">
+    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara.png" class="fixed-img" style="width:auto; height:150px;">
     """,
     unsafe_allow_html=True
 )
