@@ -40,6 +40,20 @@ def communicate():
 # ユーザーインターフェイスの構築
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
 st.image("akihabara.png")
+
+# 背景画像の設定
+st.markdown(
+    """
+    <style>
+    .main {
+        background-image: url("akihabara_background.jpg");
+        background-size: cover;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
 
 user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input", on_change=communicate)
