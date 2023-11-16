@@ -42,7 +42,7 @@ st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
 # GitHub上の背景画像のURL
 bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara_background.jpg"
 
-# 背景画像の設定
+# 背景画像の設定とテキストの可読性向上
 st.markdown(
     f"""
     <style>
@@ -59,6 +59,14 @@ st.markdown(
         margin: 0;
         z-index: 999;
     }}
+    .overlay-bg {{
+        background-color: rgba(255, 255, 255, 0.7);  /* 半透明の白色オーバーレイ */
+        border-radius: 10px;  /* 角丸のボーダー */
+        padding: 10px;  /* 内側の余白 */
+    }}
+    .stTextInput, .stButton > button {{
+        background-color: transparent;
+    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -74,7 +82,14 @@ st.markdown(
 
 st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
 
-user_input = st.text_input("メイドちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input", on_change=communicate)
+# テキスト入力フィールドとボタンにオーバーレイを追加
+with st.container():
+    st.markdown('<div class="overlay-bg">', unsafe_allow_html=True)
+    user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input")
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+
+
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
