@@ -39,7 +39,6 @@ def communicate():
 
 # ユーザーインターフェイスの構築
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
-st.image("akihabara.png")
 
 # 背景画像の設定
 st.markdown(
