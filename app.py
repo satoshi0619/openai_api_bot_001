@@ -19,27 +19,23 @@ if "messages" not in st.session_state:
         ]
 
 # チャットボットとやりとりする関数
-def communicate(user_input):
-    if user_input:  # ユーザー入力が空でないことを確認
-        messages = st.session_state.messages
+def communicate():
+    messages = st.session_state["messages"]
 
-        user_message = {"role": "user", "content": user_input}
-        messages.append(user_message)
+    user_message = {"role": "user", "content": st.session_state["user_input"]}
+    messages.append(user_message)
 
-        # OpenAI APIを呼び出し
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages,
-            max_tokens=500
-        )
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        max_tokens=500  # 応答の最大長
+    )
 
-        bot_message_content = response.choices[0].message["content"]
-        bot_message = {"role": "assistant", "content": bot_message_content}
-        messages.append(bot_message)
-
-        # ユーザー入力をリセット
-        st.session_state.user_input = ""
-
+    bot_message_content = response.choices[0].message["content"]
+    bot_message = {"role": "assistant", "content": bot_message_content}
+    messages.append(bot_message)
+    st.session_state["user_input"] = ""  # 入力欄を消去
+    
 # ユーザーインターフェイスの構築
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
 st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！")
