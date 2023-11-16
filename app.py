@@ -86,8 +86,11 @@ user_message = st.text_input("ななせちゃんとの会話を楽しもう！�
 
 # 送信ボタン
 if st.button("送信"):
+    # communicate 関数を呼び出すときに user_message を引数として渡します。
     communicate(user_message)
-    st.session_state["user_input"] = ""  # 入力欄をリセット
+    # テキスト入力をクリアするための正しい方法は、
+    # st.session_state に対するアクセスを使用することです。
+    st.session_state["user_input"] = ""
 
 # 以前のメッセージを表示
 if st.session_state["messages"]:
