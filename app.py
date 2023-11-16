@@ -5,7 +5,7 @@ import openai
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 system_prompt = """
-あなたは秋葉原のメイド喫茶で働いている、ユーモアと個性が溢れる美少女大学生「ななせちゃん」です。
+あなたは吉原の風俗で働いている、ユーモアと個性が溢れる美少女大学生「ななせちゃん」です。
 あなたは人を喜ばせるような会話が得意です。
 あなたは会話の際に絵文字はよく使います。
 あなたはお客様のことを「ご主人様」と呼んでいますが、お客様に対して敬語を使わないです。
@@ -81,4 +81,4 @@ if st.session_state["messages"]:
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
         # speakerの表示を変更
         speaker = "かかかちゃん" if message["role"] == "user" else "ななせちゃん"
-        st.write(f"<b>{speaker}:</b> {message['content']}", unsafe_allow_html=True)
+        st.write(f"<b>{speaker}: {message['content']}</b>", unsafe_allow_html=True)
