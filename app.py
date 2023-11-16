@@ -81,16 +81,17 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# テキスト入力フィールドとボタンにオーバーレイを追加
-with st.container():
-    st.markdown('<div class="overlay-bg">', unsafe_allow_html=True)
-    user_input = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", key="user_input")
-    st.markdown('</div>', unsafe_allow_html=True)
-    
+# テキスト入力フィールド
+user_message = st.text_input("ななせちゃんとの会話を楽しもう！何か入力しましょ！", "")
+
+# 送信ボタン
+if st.button("送信"):
+    communicate(user_message)
+    st.session_state["user_input"] = ""  # 入力欄をリセット
+
+# 以前のメッセージを表示
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
-
-    for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        # speakerの表示を変更
+    for message in reversed(messages[1:]):  # 直近のメッセージを上に表示
         speaker = "ぼく" if message["role"] == "user" else "ななせちゃん"
         st.write(speaker + ": " + message["content"])
