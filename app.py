@@ -47,7 +47,7 @@ st.write("☆☆☆あなたの心にラブラブパワーを注入☆☆☆！"
 # GitHub上の背景画像のURL
 bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara_background.jpg"
 
-# 背景画像の設定とテキストの可読性向上
+# 背景画像の設定
 st.markdown(
     f"""
     <style>
@@ -64,14 +64,6 @@ st.markdown(
         margin: 0;
         z-index: 999;
     }}
-    .overlay-bg {{
-        background-color: rgba(255, 255, 255, 0.7);  /* 半透明の白色オーバーレイ */
-        border-radius: 10px;  /* 角丸のボーダー */
-        padding: 10px;  /* 内側の余白 */
-    }}
-    .stTextInput, .stButton > button {{
-        background-color: transparent;
-    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -80,7 +72,7 @@ st.markdown(
 # 画面の左下に固定される画像を配置
 st.markdown(
     f"""
-    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara.png" class="fixed-img" style="width:auto; height:150px;">
+    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/akihabara.png" class="fixed-img" style="width:auto; height:100px;">
     """,
     unsafe_allow_html=True
 )
