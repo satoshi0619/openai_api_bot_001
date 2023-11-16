@@ -41,7 +41,7 @@ def communicate():
 st.title("夢の楽園～秋葉原メイド喫茶へようこそ！")
 
 # GitHub上の背景画像のURL
-bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/edit/main/akihabara_background.jpg"  # GitHubの画像URLに置き換えてください
+bg_image_url = "https://github.com/satoshi0619/openai_api_bot_001/blob/main/akihabara_background.jpg"  # GitHubの画像URLに置き換えてください
 
 # 背景画像のあるコンテナの作成
 with st.container():
