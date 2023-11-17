@@ -68,47 +68,15 @@ def communicate():
     
 # ユーザーインターフェイスの構築
 st.title("この素晴らしい世界に祝福を！")
+st.image("app01.png")
 st.write("☆☆☆エクスプロージョン☆☆☆！")
 
-# GitHub上の背景画像のURL
-bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/app01_background.png"
-
-# 背景画像の設定
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("{bg_image_url}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }}
-    .fixed-img {{
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        margin: 0;
-        z-index: 999;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# 画面の左下に固定される画像を配置
-st.markdown(
-    f"""
-    <img src="https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/app01.png" class="fixed-img" style="width:auto; height:150px;">
-    """,
-    unsafe_allow_html=True
-)
-
-user_input = st.text_input("剣と魔法の異世界を楽しもう！", key="user_input", on_change=communicate)
+user_input = st.text_input("とりあえず転生おめでとう！まずは異世界での意気込みを宣言しよう！", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
         # speakerの表示を変更
-        speaker = "冒険者" if message["role"] == "user" else "ゲームマスター"
+        speaker = "かずま" if message["role"] == "user" else "アクア"
         st.write(f"<b>{speaker}: {message['content']}</b>", unsafe_allow_html=True)
