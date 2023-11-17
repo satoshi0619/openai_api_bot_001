@@ -71,7 +71,7 @@ st.title("この素晴らしい世界に祝福を！")
 st.write("☆☆☆エクスプロージョン☆☆☆！")
 
 # GitHub上の背景画像のURL
-bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/app01_background.jpg"
+bg_image_url = "https://raw.githubusercontent.com/satoshi0619/openai_api_bot_001/main/app01_background.png"
 
 # 背景画像の設定
 st.markdown(
